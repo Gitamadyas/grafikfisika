@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Studi Kasus Motor Listrik</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f6fa;
+    color: #17365d;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px;
+}
+
+/* HEADER */
+.header {
+    background: linear-gradient(135deg, #17365d, #285d91);
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0 0 10px;
+}
+
+.header p {
+    margin: 0;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 22px;
+    margin-bottom: 20px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+/* ANIMASI */
+.scene {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            #dff0ff 0%,
+            #dff0ff 65%,
+            #8bb56e 65%,
+            #8bb56e 76%,
+            #555 76%,
+            #555 100%
+        );
+}
+
+/* MATAHARI */
+.sun {
+    position: absolute;
+    right: 50px;
+    top: 25px;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    background: #f5b83d;
+
+    box-shadow: 0 0 30px #f5b83d;
+}
+
+/* JALAN */
+.road-line {
+    position: absolute;
+
+    bottom: 20px;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            white 0px,
+            white 55px,
+            transparent 55px,
+            transparent 105px
+        );
+}
+
+/* MOBIL */
+.car {
+    position: absolute;
+
+    left: 5%;
+    bottom: 43px;
+
+    width: 140px;
+    height: 60px;
+}
+
+.car-body {
+    position: absolute;
+
+    bottom: 10px;
+    left: 10px;
+
+    width: 120px;
+    height: 38px;
+
+    background: #e67e22;
+
+    border-radius: 12px 25px 8px 8px;
+}
+
+.car-roof {
+    position: absolute;
+
+    bottom: 45px;
+    left: 40px;
+
+    width: 65px;
+    height: 30px;
+
+    background: #dcecf8;
+
+    border: 5px solid #e67e22;
+
+    border-bottom: none;
+
+    border-radius: 30px 30px 0 0;
+}
+
+.wheel {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 27px;
+    height: 27px;
+
+    background: #222;
+
+    border-radius: 50%;
+
+    border: 5px solid #777;
+}
+
+.wheel1 {
+    left: 20px;
+}
+
+.wheel2 {
+    right: 10px;
+}
+
+/* SPEEDOMETER */
+.speed-box {
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    background: white;
+
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+}
+
+/* BUTTON */
+.buttons {
+    margin-top: 15px;
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 11px 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.start {
+    background: #17365d;
+    color: white;
+}
+
+.pause,
+.reset {
+    background: #e8eef5;
+    color: #17365d;
+}
+
+button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* STATUS */
+.status {
+    display: inline-block;
+
+    margin-top: 15px;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    background: #eef3f8;
+
+    font-weight: bold;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1.3fr;
+
+    gap: 20px;
+}
+
+@media(max-width:800px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* TABLE */
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+
+    border: 1px solid #d7dee8;
+
+    text-align: center;
+}
+
+th {
+    background: #17365d;
+
+    color: white;
+}
+
+/* GRAPH */
+canvas {
+
+    width: 100%;
+
+    height: 350px;
+
+    border: 1px solid #dce3eb;
+
+    border-radius: 12px;
+
+    background: white;
+}
+
+/* QUESTIONS */
+.question {
+
+    margin-bottom: 15px;
+
+    padding: 15px;
+
+    background: #fafbfc;
+
+    border-left: 5px solid #e67e22;
+
+    border-radius: 8px;
+}
+
+textarea {
+
+    width: 100%;
+
+    min-height: 80px;
+
+    margin-top: 10px;
+
+    padding: 10px;
+
+    border: 1px solid #ccd5df;
+
+    border-radius: 8px;
+
+    resize: vertical;
+
+    font-family: Arial;
+}
+
+.hidden {
+    display: none;
+}
+
+.footer {
+
+    text-align: center;
+
+    padding: 20px;
+
+    color: #687789;
+
+    font-size: 13px;
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+
+<div class="header">
+
+<h1>🚗 Studi Kasus Motor Listrik</h1>
+
+<p>
+Analisis Gerak Menggunakan Grafik Kecepatan–Waktu
+</p>
+
+</div>
+
+
+<!-- ANIMASI -->
+
+<div class="card">
+
+<h2>🎬 Amati Animasi</h2>
+
+<p>
+
+Sebuah kendaraan listrik digerakkan oleh motor listrik.
+Kendaraan mula-mula diam kemudian kecepatannya meningkat secara teratur.
+
+Perhatikan perubahan waktu, kecepatan, dan grafik yang terbentuk.
+
+</p>
+
+
+<div class="scene">
+
+<div class="sun"></div>
+
+
+<div class="speed-box">
+
+t = <span id="time">0.0</span> s
+
+&nbsp; | &nbsp;
+
+v = <span id="speed">0.0</span> m/s
+
+</div>
+
+
+<div class="car" id="car">
+
+<div class="car-roof"></div>
+
+<div class="car-body"></div>
+
+<div class="wheel wheel1"></div>
+
+<div class="wheel wheel2"></div>
+
+</div>
+
+
+<div class="road-line"></div>
+
+</div>
+
+
+<div class="buttons">
+
+<button
+class="start"
+onclick="startAnimation()"
+id="startBtn">
+
+▶ Mulai
+
+</button>
+
+
+<button
+class="pause"
+onclick="pauseAnimation()"
+id="pauseBtn"
+disabled>
+
+⏸ Pause
+
+</button>
+
+
+<button
+class="reset"
+onclick="resetAnimation()">
+
+↻ Ulangi
+
+</button>
+
+</div>
+
+
+<div class="status" id="status">
+
+Status: siap diamati
+
+</div>
+
+</div>
+
+
+
+<!-- DATA DAN GRAFIK -->
+
+<div class="grid">
+
+
+<div class="card">
+
+<h2>📋 Data Pengamatan</h2>
+
+<p>
+
+Data akan muncul ketika animasi berlangsung.
+
+</p>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Waktu (s)</th>
+
+<th>Kecepatan (m/s)</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="dataBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>📈 Grafik Kecepatan–Waktu</h2>
+
+<canvas
+id="graph"
+width="700"
+height="400">
+</canvas>
+
+<p>
+
+Perhatikan:
+
+<b>kemiringan grafik</b>
+
+dan
+
+<b>luas daerah di bawah grafik</b>.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- SOAL -->
+
+<div
+class="card hidden"
+id="questions">
+
+<h2>📝 Pertanyaan untuk Mahasiswa</h2>
+
+<p>
+
+Gunakan data dan grafik yang telah diamati.
+Tuliskan langkah perhitungan dan alasanmu.
+
+</p>
+
+
+
+<div class="question">
+
+<b>1.</b>
+
+Tentukan percepatan kendaraan selama 10 detik.
+
+<textarea
+placeholder="Tuliskan langkah perhitungan...">
+</textarea>
+
+</div>
+
+
+
+<div class="question">
+
+<b>2.</b>
+
+Tentukan jarak yang ditempuh kendaraan selama 10 detik.
+
+<textarea
+placeholder="Tuliskan langkah perhitungan...">
+</textarea>
+
+</div>
+
+
+
+<div class="question">
+
+<b>3.</b>
+
+Berapa kecepatan kendaraan pada saat
+
+<b>t = 6 s?</b>
+
+<textarea
+placeholder="Tuliskan jawaban...">
+</textarea>
+
+</div>
+
+
+
+<div class="question">
+
+<b>4.</b>
+
+Apa arti kemiringan (slope) pada grafik kecepatan–waktu?
+
+<textarea
+placeholder="Jelaskan dengan kalimatmu sendiri...">
+</textarea>
+
+</div>
+
+
+
+<div class="question">
+
+<b>5.</b>
+
+Tentukan jarak menggunakan luas daerah di bawah grafik.
+
+<textarea
+placeholder="Tuliskan cara menghitung luas grafik...">
+</textarea>
+
+</div>
+
+
+
+<div class="question">
+
+<b>6.</b>
+
+Bandingkan hasil nomor 2 dengan hasil nomor 5.
+
+Apa kesimpulanmu?
+
+<textarea
+placeholder="Tuliskan analisismu...">
+</textarea>
+
+</div>
+
+
+
+<button
+class="start"
+onclick="window.print()">
+
+🖨 Cetak / Simpan PDF
+
+</button>
+
+</div>
+
+
+
+<div class="footer">
+
+LKPD Digital • Fisika • Motor Listrik dan Analisis Grafik
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================
+   DATA STUDI KASUS
+========================= */
+
+const times = [0,2,4,6,8,10];
+
+const speeds = [0,3,6,9,12,15];
+
+
+
+/* =========================
+   VARIABEL
+========================= */
+
+let running = false;
+
+let elapsed = 0;
+
+let timer = null;
+
+
+
+const timeElement =
+document.getElementById("time");
+
+const speedElement =
+document.getElementById("speed");
+
+const car =
+document.getElementById("car");
+
+const statusElement =
+document.getElementById("status");
+
+const startButton =
+document.getElementById("startBtn");
+
+const pauseButton =
+document.getElementById("pauseBtn");
+
+const questions =
+document.getElementById("questions");
+
+const dataBody =
+document.getElementById("dataBody");
+
+
+
+/* =========================
+   CANVAS
+========================= */
+
+const canvas =
+document.getElementById("graph");
+
+const ctx =
+canvas.getContext("2d");
+
+
+
+/* =========================
+   MENCARI KECEPATAN
+========================= */
+
+function getSpeed(t){
+
+    if(t <= 0)
+        return 0;
+
+    if(t >= 10)
+        return 15;
+
+    return 1.5 * t;
+
+}
+
+
+
+/* =========================
+   MENGGAMBAR GRAFIK
+========================= */
+
+function drawGraph(currentTime){
+
+    const W = canvas.width;
+
+    const H = canvas.height;
+
+    const left = 65;
+
+    const right = 25;
+
+    const top = 25;
+
+    const bottom = 55;
+
+    const graphWidth =
+        W - left - right;
+
+    const graphHeight =
+        H - top - bottom;
+
+
+
+    ctx.clearRect(
+        0,
+        0,
+        W,
+        H
+    );
+
+
+
+    /* GRID */
+
+    ctx.strokeStyle =
+        "#dfe5eb";
+
+    ctx.lineWidth = 1;
+
+
+
+    for(let t=0;t<=10;t+=2){
+
+        const x =
+            left +
+            (t/10)*graphWidth;
+
+        ctx.beginPath();
+
+        ctx.moveTo(x,top);
+
+        ctx.lineTo(
+            x,
+            H-bottom
+        );
+
+        ctx.stroke();
+
+    }
+
+
+
+    for(let v=0;v<=15;v+=3){
+
+        const y =
+            H-bottom -
+            (v/15)*graphHeight;
+
+        ctx.beginPath();
+
+        ctx.moveTo(left,y);
+
+        ctx.lineTo(
+            W-right,
+            y
+        );
+
+        ctx.stroke();
+
+    }
+
+
+
+    /* SUMBU */
+
+    ctx.strokeStyle =
+        "#17365d";
+
+    ctx.lineWidth = 2;
+
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(left,top);
+
+    ctx.lineTo(
+        left,
+        H-bottom
+    );
+
+    ctx.lineTo(
+        W-right,
+        H-bottom
+    );
+
+    ctx.stroke();
+
+
+
+    /* LABEL X */
+
+    ctx.fillStyle =
+        "#17365d";
+
+    ctx.font =
+        "14px Arial";
+
+    ctx.textAlign =
+        "center";
+
+
+
+    for(let t=0;t<=10;t+=2){
+
+        const x =
+            left +
+            (t/10)*graphWidth;
+
+        ctx.fillText(
+            t,
+            x,
+            H-bottom+25
+        );
+
+    }
+
+
+
+    /* LABEL Y */
+
+    ctx.textAlign =
+        "right";
+
+
+
+    for(let v=0;v<=15;v+=3){
+
+        const y =
+            H-bottom -
+            (v/15)*graphHeight;
+
+        ctx.fillText(
+            v,
+            left-10,
+            y+5
+        );
+
+    }
+
+
+
+    ctx.textAlign =
+        "center";
+
+
+
+    ctx.fillText(
+        "Waktu, t (s)",
+        left+graphWidth/2,
+        H-12
+    );
+
+
+
+    /* LABEL Y VERTIKAL */
+
+    ctx.save();
+
+    ctx.translate(
+        17,
+        top+graphHeight/2
+    );
+
+    ctx.rotate(
+        -Math.PI/2
+    );
+
+    ctx.fillText(
+        "Kecepatan, v (m/s)",
+        0,
+        0
+    );
+
+    ctx.restore();
+
+
+
+    /* GARIS GRAFIK */
+
+    const end =
+        Math.min(
+            currentTime,
+            10
+        );
+
+
+
+    ctx.strokeStyle =
+        "#e67e22";
+
+    ctx.lineWidth = 4;
+
+
+
+    ctx.beginPath();
+
+
+
+    const steps = 100;
+
+
+
+    for(
+        let i=0;
+        i<=steps;
+        i++
+    ){
+
+        const t =
+            end*i/steps;
+
+        const v =
+            getSpeed(t);
+
+
+
+        const x =
+            left +
+            (t/10)*graphWidth;
+
+
+
+        const y =
+            H-bottom -
+            (v/15)*graphHeight;
+
+
+
+        if(i===0)
+
+            ctx.moveTo(x,y);
+
+        else
+
+            ctx.lineTo(x,y);
+
+    }
+
+
+
+    ctx.stroke();
+
+
+
+    /* TITIK DATA */
+
+    ctx.fillStyle =
+        "#17365d";
+
+
+
+    for(
+        let i=0;
+        i<times.length;
+        i++
+    ){
+
+        if(
+            times[i]
+            <= end
+        ){
+
+            const x =
+                left +
+                (times[i]/10)
+                *graphWidth;
+
+
+
+            const y =
+                H-bottom -
+                (speeds[i]/15)
+                *graphHeight;
+
+
+
+            ctx.beginPath();
+
+            ctx.arc(
+                x,
+                y,
+                5,
+                0,
+                Math.PI*2
+            );
+
+            ctx.fill();
+
+        }
+
+    }
+
+
+
+    /* TITIK BERGERAK */
+
+    const x =
+        left +
+        (end/10)
+        *graphWidth;
+
+
+
+    const y =
+        H-bottom -
+        (getSpeed(end)/15)
+        *graphHeight;
+
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        7,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+}
+
+
+
+/* =========================
+   TABEL DATA
+========================= */
+
+function updateTable(currentTime){
+
+    dataBody.innerHTML = "";
+
+
+
+    for(
+        let i=0;
+        i<times.length;
+        i++
+    ){
+
+        if(
+            times[i]
+            <= currentTime
+        ){
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+
+            row.innerHTML =
+
+                "<td>"
+                + times[i]
+                + "</td>"
+
+                +
+
+                "<td>"
+                + speeds[i]
+                + "</td>";
+
+
+
+            dataBody.appendChild(
+                row
+            );
+
+        }
+
+    }
+
+}
+
+
+
+/* =========================
+   UPDATE ANIMASI
+========================= */
+
+function update(){
+
+    elapsed += 0.05;
+
+
+
+    if(elapsed >= 10){
+
+        elapsed = 10;
+
+        finishAnimation();
+
+        return;
+
+    }
+
+
+
+    const speed =
+        getSpeed(elapsed);
+
+
+
+    timeElement.textContent =
+        elapsed.toFixed(1);
+
+
+
+    speedElement.textContent =
+        speed.toFixed(1);
+
+
+
+    /* POSISI MOBIL */
+
+    const position =
+        5 +
+        (elapsed/10)*82;
+
+
+
+    car.style.left =
+        position + "%";
+
+
+
+    drawGraph(elapsed);
+
+    updateTable(elapsed);
+
+}
+
+
+
+/* =========================
+   MULAI
+========================= */
+
+function startAnimation(){
+
+    if(running)
+        return;
+
+
+
+    running = true;
+
+
+
+    startButton.disabled =
+        true;
+
+
+
+    pauseButton.disabled =
+        false;
+
+
+
+    statusElement.textContent =
+        "Status: animasi sedang berjalan";
+
+
+
+    timer =
+        setInterval(
+            update,
+            50
+        );
+
+}
+
+
+
+/* =========================
+   PAUSE
+========================= */
+
+function pauseAnimation(){
+
+    running = false;
+
+
+
+    clearInterval(timer);
+
+
+
+    startButton.disabled =
+        false;
+
+
+
+    pauseButton.disabled =
+        true;
+
+
+
+    statusElement.textContent =
+        "Status: animasi dijeda";
+
+}
+
+
+
+/* =========================
+   SELESAI
+========================= */
+
+function finishAnimation(){
+
+    running = false;
+
+
+
+    clearInterval(timer);
+
+
+
+    startButton.disabled =
+        true;
+
+
+
+    pauseButton.disabled =
+        true;
+
+
+
+    statusElement.textContent =
+        "Status: pengamatan selesai — silakan jawab pertanyaan";
+
+
+
+    questions.classList.remove(
+        "hidden"
+    );
+
+
+
+    window.scrollTo({
+
+        top:
+            document.body.scrollHeight,
+
+        behavior:
+            "smooth"
+
+    });
+
+}
+
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetAnimation(){
+
+    clearInterval(timer);
+
+
+
+    running = false;
+
+
+
+    elapsed = 0;
+
+
+
+    startButton.disabled =
+        false;
+
+
+
+    pauseButton.disabled =
+        true;
+
+
+
+    questions.classList.add(
+        "hidden"
+    );
+
+
+
+    statusElement.textContent =
+        "Status: siap diamati";
+
+
+
+    timeElement.textContent =
+        "0.0";
+
+
+
+    speedElement.textContent =
+        "0.0";
+
+
+
+    car.style.left =
+        "5%";
+
+
+
+    dataBody.innerHTML =
+        "";
+
+
+
+    drawGraph(0);
+
+}
+
+
+
+/* =========================
+   GAMBAR AWAL
+========================= */
+
+drawGraph(0);
+
+</script>
+
+</body>
+</html>
